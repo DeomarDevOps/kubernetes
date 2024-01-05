@@ -1,0 +1,46 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: vecho-get
+  namespace: vadal
+spec:
+  selector:
+    matchLabels:
+      app: vecho
+  action: ALLOW
+  rules:
+  - to:
+    - operation:
+        methods: ["GET"]
+    when:
+      - key: request.auth.claims[iss]
+        values: ["http://localhost:30006/auth/realms/vadal"]
+
+
+
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"security.istio.io/v1beta1","kind":"AuthorizationPolicy","metadata":{"annotations":{},"name":"get","namespace":"dev"},"spec":{"action":"ALLOW","rules":[{"to":[{"operation":{"methods":["GET"]}}],"when":[{"key":"request.auth.claims[iss]","values":["http://191.235.44.188/auth/realms/istio"]}]}],"selector":{"matchLabels":{"app":"unidas-ms-antifraud"}}}}
+  creationTimestamp: "2023-07-18T14:55:52Z"
+  generation: 1
+  name: get
+  namespace: dev
+  resourceVersion: "10730828"
+  uid: 7bfe84cd-ef21-45ef-a4c2-a8444416d5bd
+spec:
+  action: ALLOW
+  rules:
+  - to:
+    - operation:
+        methods:
+        - GET
+    when:
+    - key: request.auth.claims[iss]
+      values:
+      - http://191.235.44.188/auth/realms/istio
+  selector:
+    matchLabels:
+      app: unidas-ms-antifraud

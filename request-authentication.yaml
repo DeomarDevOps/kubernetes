@@ -1,0 +1,37 @@
+apiVersion: security.istio.io/v1beta1
+kind: "RequestAuthentication"
+metadata:
+  name: vecho-jwt
+  namespace: vadal
+spec:
+  selector:
+    matchLabels:
+      app: vecho
+  jwtRules:
+    - outputPayloadToHeader: vadaltoken
+      issuer: "http://localhost:30006/auth/realms/vadal"
+      jwksUri: "http://keycloak-http.default.svc.cluster.local/auth/realms/vadal/protocol/openid-connect/certs"
+
+
+
+
+apiVersion: security.istio.io/v1
+kind: RequestAuthentication
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"security.istio.io/v1beta1","kind":"RequestAuthentication","metadata":{"annotations":{},"name":"jwt","namespace":"dev"},"spec":{"jwtRules":[{"issuer":"http://191.235.44.188/auth/realms/istio","jwksUri":"http://my-keycloak-http.default.svc.cluster.local/auth/realms/istio/protocol/openid-connect/certs","outputPayloadToHeader":"istiotoken"}],"selector":{"matchLabels":{"app":"unidas-ms-antifraud"}}}}
+  creationTimestamp: "2023-07-18T14:55:51Z"
+  generation: 1
+  name: jwt
+  namespace: dev
+  resourceVersion: "10730825"
+  uid: f68a84a0-3eda-4e02-9b1a-d2f4f95d6f43
+spec:
+  jwtRules:
+  - issuer: https://keycloak-ms.unidas.com.br/auth/realms/istio
+    jwksUri: http://my-keycloak-http.default.svc.cluster.local/auth/realms/istio/protocol/openid-connect/certs
+    outputPayloadToHeader: istiotoken
+  selector:
+    matchLabels:
+      app: unidas-ms-antifraud
