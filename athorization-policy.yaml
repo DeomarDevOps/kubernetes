@@ -40,7 +40,7 @@ spec:
     when:
     - key: request.auth.claims[iss]
       values:
-      - http://191.235.44.188/auth/realms/istio
+      - http://##############/auth/realms/istio
   selector:
     matchLabels:
-      app: unidas-ms-antifraud
+      app: ###############
