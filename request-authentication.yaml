@@ -29,9 +29,9 @@ metadata:
   uid: f68a84a0-3eda-4e02-9b1a-d2f4f95d6f43
 spec:
   jwtRules:
-  - issuer: https://keycloak-ms.unidas.com.br/auth/realms/istio
+  - issuer: https://keycloak-ms.#########.com.br/auth/realms/istio
     jwksUri: http://my-keycloak-http.default.svc.cluster.local/auth/realms/istio/protocol/openid-connect/certs
     outputPayloadToHeader: istiotoken
   selector:
     matchLabels:
-      app: unidas-ms-antifraud
+      app: ##############
